@@ -1,3 +1,4 @@
+dist: xenial
 language: ruby
 cache:
   bundler: true
@@ -6,7 +7,16 @@ cache:
     - node_modules
 
 addons:
-  postgresql: "9.6"
+  postgresql: "10"
+
+apt:
+  packages:
+    - postgresql-10
+    - postgresql-client-10
+
+env:
+  global:
+    - PGPORT=5433
 
 services:
   - postgresql
