@@ -6,12 +6,15 @@ require 'dates_string_parser'
 
 class Event < ApplicationRecord
   audited
+  has_associated_audits
 
   belongs_to :venue
   belongs_to :class_organiser, class_name: 'Organiser', optional: true
   belongs_to :social_organiser, class_name: 'Organiser', optional: true
-  has_and_belongs_to_many :swing_dates, -> { distinct(true) }
-  has_and_belongs_to_many :swing_cancellations, -> { distinct(true) }, class_name: 'SwingDate', join_table: 'events_swing_cancellations'
+  has_many :events_swing_dates, dependent: :destroy
+  has_many :swing_dates, -> { distinct(true) }, through: :events_swing_dates
+  has_many :events_swing_cancellations, dependent: :destroy
+  has_many :swing_cancellations, -> { distinct(true) }, through: :events_swing_cancellations, source: :swing_date
 
   serialize :date_array
   serialize :cancellation_array

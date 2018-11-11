@@ -68,13 +68,13 @@ ActiveRecord::Schema.define(version: 2018_11_18_151929) do
     t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
-  create_table "events_swing_cancellations", id: false, force: :cascade do |t|
+  create_table "events_swing_cancellations", force: :cascade do |t|
     t.integer "swing_date_id", null: false
     t.integer "event_id", null: false
     t.index ["swing_date_id", "event_id"], name: "index_events_swing_cancellations_on_swing_date_id_and_event_id", unique: true
   end
 
-  create_table "events_swing_dates", id: false, force: :cascade do |t|
+  create_table "events_swing_dates", force: :cascade do |t|
     t.integer "swing_date_id", null: false
     t.integer "event_id", null: false
     t.index ["swing_date_id", "event_id"], name: "index_events_swing_dates_on_swing_date_id_and_event_id", unique: true
