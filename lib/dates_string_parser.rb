@@ -1,15 +1,7 @@
 # frozen_string_literal: true
 
 class DatesStringParser
-  def parse(date_string)
-    String(date_string).split(',').map { |ds| safe_parse_date(ds) }.compact.uniq
-  end
-
-  private
-
-  def safe_parse_date(ds)
-    ds.to_date
-  rescue ArgumentError
-    # TODO: Log?
+  def parse(dates_string)
+    String(dates_string).split(',').map(&:to_date).uniq
   end
 end

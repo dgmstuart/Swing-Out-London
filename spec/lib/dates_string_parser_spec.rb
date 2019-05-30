@@ -45,7 +45,7 @@ RSpec.describe DatesStringParser do
         '13/13/2015',
         '-1975'
       ].each do |string|
-        expect(parse(string)).to eq []
+        expect { parse(string) }.to raise_error(ArgumentError, 'invalid date')
       end
     end
   end

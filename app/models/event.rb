@@ -20,9 +20,13 @@ class Event < ApplicationRecord
   validates :event_type, :frequency, :url, :day, presence: true
 
   validates :course_length, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
+  validates :date_array, dates_string: true
 
   validate :cannot_be_weekly_and_have_dates
   validate :will_be_listed
+
+  before_save :set_dates
+  before_save :set_cancellations
 
   def cannot_be_weekly_and_have_dates
     return unless weekly? && !dates.empty?
@@ -138,8 +142,9 @@ class Event < ApplicationRecord
     array_of_new_dates.each { |nd| add_date(nd) }
   end
 
-  def date_array=(date_string)
-    self.dates = DatesStringParser.new.parse(date_string)
+  def set_dates
+    require 'pry'; binding.pry
+    self.dates = DatesStringParser.new.parse(date_array)
   end
 
   def cancellations
@@ -155,19 +160,20 @@ class Event < ApplicationRecord
     swing_cancellations << SwingDate.find_or_initialize_by(date: new_cancellation)
   end
 
-  def cancellation_array=(date_string)
-    self.cancellations = DatesStringParser.new.parse(date_string)
+  def set_cancellations
+    require 'pry'; binding.pry
+    self.cancellations = DatesStringParser.new.parse(cancellation_array)
   end
 
   # READ METHODS #
 
-  def date_array(future = false)
-    return_array_of_dates(dates, future)
-  end
+  # def date_array(future = false)
+  #   return_array_of_dates(dates, future)
+  # end
 
-  def cancellation_array(future = false)
-    return_array_of_dates(cancellations, future)
-  end
+  # def cancellation_array(future = false)
+  #   return_array_of_dates(cancellations, future)
+  # end
 
   private
 

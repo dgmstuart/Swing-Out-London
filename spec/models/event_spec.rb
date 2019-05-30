@@ -274,6 +274,22 @@ describe Event do
       event.valid?
       expect(event.errors.messages).to eq(venue: ['must exist'])
     end
+
+    it 'is valid with an empty date array' do
+      expect(FactoryBot.build(:event, date_array: '')).to be_valid
+    end
+
+    it 'is invalid with an invalid date array' do
+      expect(FactoryBot.build(:event, date_array: '100')).not_to be_valid
+    end
+
+    it 'is valid with an empty cancellation array' do
+      expect(FactoryBot.build(:event, cancellation_array: '')).to be_valid
+    end
+
+    it 'is invalid with an invalid cancellation array' do
+      expect(FactoryBot.build(:event, cancellation_array: '100')).not_to be_valid
+    end
   end
 
   describe 'expected_date' do
