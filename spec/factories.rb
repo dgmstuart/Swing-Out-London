@@ -35,6 +35,7 @@ FactoryBot.define do
   factory :venue do
     name { 'test_venue' }
     area { 'test_area' }
+    address { 'London' }
     lat { 0.0 }
     lng { 0.0 }
     website { 'http://www.example.com' }
