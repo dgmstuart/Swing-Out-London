@@ -8,6 +8,11 @@ RSpec.describe Venue do
     it { is_expected.to have_many(:events).dependent(:restrict_with_exception) }
   end
 
+  describe 'Validations' do
+    it { is_expected.to validate_presence_of(:area) }
+    it { is_expected.to validate_presence_of(:name) }
+  end
+
   describe 'can_delete?' do
     it 'is true if there are no associated events' do
       venue = FactoryBot.build(:venue)

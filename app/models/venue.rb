@@ -11,7 +11,8 @@ class Venue < ApplicationRecord
   scope :all_with_classes_listed, -> { where(id: Event.listing_classes.select('distinct venue_id')) }
   scope :all_with_classes_listed_on_day, ->(day) { where(id: Event.listing_classes_on_day(day).select('distinct venue_id')) }
 
-  validates :name, :area, presence: true
+  validates :area, presence: true
+  validates :name, presence: true
   validates :website, format: URI.regexp(%w[http https])
 
   before_validation do
