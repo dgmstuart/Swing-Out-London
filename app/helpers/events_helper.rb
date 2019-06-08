@@ -112,16 +112,16 @@ module EventsHelper
     link_to_unless event.url.nil?, display, event.url, id: event.id
   end
 
-  def mapinfo_social_listing(social, cancelled)
-    if social.title.blank?
+  def mapinfo_social_listing(event_listing)
+    if event_listing.event.title.blank?
       logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
       return
     end
 
     cancelled_part = ''
-    cancelled_part = cancelled_label + ' ' if cancelled
+    cancelled_part = cancelled_label + ' ' if event_listing.cancelled?
 
-    raw(cancelled_part + mapinfo_social_link(social))
+    raw(cancelled_part + mapinfo_social_link(event_listing.event))
   end
 
   def mapinfo_social_class_info(social)

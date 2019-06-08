@@ -16,11 +16,14 @@ class MapsController < ApplicationController
     @day = Maps::Classes::DayParser.parse(params[:day], today)
     venues = Maps::Classes::VenueQuery.new(@day).venues
 
+    marker_info_builder = Maps::MarkerInfoBuilder.new(
+      event_finder: Maps::Classes::FinderFromVenue.new(day: @day)
+    )
     @map =
       Maps::Map.new(
         venues: venues,
         highlighted_venue_id: params[:venue_id].to_i,
-        event_finder: Maps::Classes::FinderFromVenue.new(day: @day),
+        marker_info_builder: marker_info_builder,
         info_window_partial: 'classes_map_info',
         renderer: self
       )
@@ -35,13 +38,16 @@ class MapsController < ApplicationController
     response.headers['Cache-Control'] = 'public, max-age=3600'
 
     @map_dates = Maps::Socials::Dates.new(params[:date], today)
-    venues = Maps::Socials::VenueQuery.new(@map_dates.display_dates).venues
 
+    venues = Maps::Socials::VenueQuery.new(@map_dates.display_dates).venues
+    marker_info_builder = Maps::MarkerInfoBuilder.new(
+      event_finder: Maps::Socials::FinderFromVenue.new(date: @map_dates.selected_date, today: today)
+    )
     @map =
       Maps::Map.new(
         venues: venues,
         highlighted_venue_id: params[:venue_id].to_i,
-        event_finder: Maps::Socials::FinderFromVenue.new(date: @date, today: today),
+        marker_info_builder: marker_info_builder,
         info_window_partial: 'socials_map_info',
         renderer: self
       )

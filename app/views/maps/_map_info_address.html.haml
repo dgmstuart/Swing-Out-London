@@ -1,7 +1,7 @@
 .venue_info.vcard
-  %h3.url.fn= link_to venue.name, venue.website
+  %h3.url.fn= link_to marker_info.venue_name, marker_info.venue_url
   .adr
-    - venue.address.split(',').each do |address_line|
-      %p=address_line unless address_line.strip == "London"
+    - marker_info.address_lines.each do |address_line|
+      %p= address_line
     %p.postal-code
-      = venue.postcode
+      = marker_info.postcode

@@ -1,8 +1,8 @@
-= render partial: "map_info_address", locals: { venue: venue }
+= render partial: "map_info_address", locals: { marker_info: marker_info }
 
 %ul.listing_info
-  - events.each do |event|
+  - marker_info.class_listings.each do |class_listing|
     %li
-      %span.day= "#{event.day.pluralize}:"
-      = mapinfo_swingclass_link(event)
-      = swingclass_cancelledmsg(event)
+      %span.day= "#{class_listing.when}:"
+      = mapinfo_swingclass_link(class_listing.event)
+      = swingclass_cancelledmsg(class_listing.event)

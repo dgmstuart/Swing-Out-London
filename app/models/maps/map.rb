@@ -4,10 +4,10 @@ module Maps
   class Map
     attr_reader :highlighted_venue
 
-    def initialize(venues:, highlighted_venue_id:, event_finder:, info_window_partial:, renderer:)
+    def initialize(venues:, highlighted_venue_id:, marker_info_builder:, info_window_partial:, renderer:)
       @venues = venues
       @highlighted_venue_id = highlighted_venue_id
-      @event_finder = event_finder
+      @marker_info_builder = marker_info_builder
       @info_window_partial = info_window_partial
       @renderer = renderer
     end
@@ -18,7 +18,7 @@ module Maps
 
     private
 
-    attr_reader :venues, :highlighted_venue_id, :event_finder, :info_window_partial, :renderer
+    attr_reader :venues, :highlighted_venue_id, :marker_info_builder, :info_window_partial, :renderer
 
     def marker(venue)
       position = { lat: venue.lat, lng: venue.lng }
@@ -41,8 +41,7 @@ module Maps
         partial: info_window_partial,
         formats: [:html],
         locals: {
-          venue: venue,
-          events: event_finder.find(venue)
+          marker_info: marker_info_builder.build(venue)
         }
       )
     end
