@@ -1,19 +1,11 @@
 = render partial: "map_info_address", locals: { venue: venue }
 
 %ul.listing_info
-  - if @date
-    - socials_on_date, cancelled_ids = events
+  - events.each do |date, socials_on_date, cancelled_ids|
     - socials_on_date.each do |social|
       - cancelled = cancelled_ids.include?(social.id) unless cancelled_ids.nil?
       %li
-        = mapinfo_social_listing(social, cancelled)
+        = mapinfo_social_listing(social, cancelled, date)
 
-  - else
-    - events.each do |date, socials_on_date, cancelled_ids|
-      - socials_on_date.each do |social|
-        - cancelled = cancelled_ids.include?(social.id) unless cancelled_ids.nil?
-        %li
-          = mapinfo_social_listing(social, cancelled, date)
-- unless @date
-  %p.nota_bene
-    %em N.B. Swing Out London only lists events for the next 14 days
+%p.nota_bene
+  %em N.B. Swing Out London only lists events for the next 14 days
