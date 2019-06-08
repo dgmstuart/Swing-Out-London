@@ -5,7 +5,8 @@
     - socials_on_date.each do |social|
       - cancelled = cancelled_ids.include?(social.id) unless cancelled_ids.nil?
       %li
-        = mapinfo_social_listing(social, cancelled, date)
+        %span.social_date= "#{date.to_s(:listing_date)}:"
+        %span.event_details= mapinfo_social_listing(social, cancelled)
 
 %p.nota_bene
   %em N.B. Swing Out London only lists events for the next 14 days

@@ -46,7 +46,7 @@ RSpec.describe 'Users can view a map of upcoming events' do
       expect(info_window).to have_content('The Boudoir Club')
       expect(info_window).to have_content('22 Night Street')
       expect(info_window).to have_content('ZZ2 2ZZ')
-      expect(info_window).to have_link('Saturday 8th June', href: '/map/socials/2019-06-08')
+      expect(info_window).to have_content('Saturday 8th June:')
       expect(info_window).to have_link('Bedroom Bounce', href: 'https://bb.com')
     end
 

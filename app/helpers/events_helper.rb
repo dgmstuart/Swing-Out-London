@@ -112,14 +112,11 @@ module EventsHelper
     link_to_unless event.url.nil?, display, event.url, id: event.id
   end
 
-  def mapinfo_social_listing(social, cancelled, date)
+  def mapinfo_social_listing(social, cancelled)
     if social.title.blank?
       logger.error "[ERROR]: tried to display Event (id = #{social.id}) without a title"
       return
     end
-
-    date_part_content = link_to date.to_s(:listing_date), date: date.to_s(:db)
-    date_info = content_tag :span, date_part_content + ': ', class: 'social_date'
 
     cancelled_part = ''
     cancelled_part = cancelled_label + ' ' if cancelled
@@ -141,10 +138,7 @@ module EventsHelper
       class_info = " (with#{class_style} #{class_type}#{school_info})"
     end
 
-    social_details = raw(cancelled_part + mapinfo_social_link(social) + swingclass_info(class_info))
-    social_details = content_tag :span, social_details, class: 'event_details'
-
-    raw(date_info + social_details)
+    raw(cancelled_part + mapinfo_social_link(social) + swingclass_info(class_info))
   end
 
   def mapinfo_social_link(event)
