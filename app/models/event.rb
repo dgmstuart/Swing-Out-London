@@ -401,7 +401,9 @@ class Event < ApplicationRecord
 
   def self.cancelled_events_on_date(date)
     swing_date = SwingDate.find_by(date: date)
-    swing_date&.cancelled_events&.collect { |e| e.id }
+    return [] unless swing_date
+
+    swing_date.cancelled_events.pluck :id
   end
 
   def self.listing_dates(start_date)
