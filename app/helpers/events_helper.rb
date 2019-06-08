@@ -121,6 +121,10 @@ module EventsHelper
     cancelled_part = ''
     cancelled_part = cancelled_label + ' ' if cancelled
 
+    raw(cancelled_part + mapinfo_social_link(social))
+  end
+
+  def mapinfo_social_class_info(social)
     class_info = ''
     if social.has_class? || social.has_taster?
       class_style = ''
@@ -138,14 +142,14 @@ module EventsHelper
       class_info = " (with#{class_style} #{class_type}#{school_info})"
     end
 
-    raw(cancelled_part + mapinfo_social_link(social) + swingclass_info(class_info))
+    swingclass_info(class_info)
   end
 
   def mapinfo_social_link(event)
     new_label = ''
     new_label = new_event_label + ' ' if event.new?
 
-    display = raw(new_label + event.title)
+    display = raw(new_label + event.title + mapinfo_social_class_info(event))
 
     link_to_unless event.url.nil?, display, event.url
   end
