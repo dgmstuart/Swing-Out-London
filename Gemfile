@@ -30,6 +30,9 @@ gem 'sassc-rails'
 gem 'test-unit'
 gem 'uglifier'
 
+# TEMPORARY!
+gem 'sprockets', '< 4'
+
 group :development do
   gem 'bullet'
   gem 'listen'
