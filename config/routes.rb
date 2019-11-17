@@ -26,8 +26,10 @@ Rails.application.routes.draw do
   get 'venue_map_info/:id' => 'maps#venue_map_info', :as => :venue_map_info
 
   # legacy routes:
+  # rubocop:disable Style/FormatStringToken
   get 'map/classes/:day/:venue_id', to: redirect('/map/classes/%{day}?venue_id=%{venue_id}')
   get 'map/socials/:date/:venue_id', to: redirect('/map/socials/%{date}?venue_id=%{venue_id}')
+  # rubocop:enable Style/FormatStringToken
 
   get 'name_clash' => 'name_clash#index'
   get 'outdated' => 'outdated#index'

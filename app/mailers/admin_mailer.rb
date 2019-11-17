@@ -5,8 +5,8 @@ class AdminMailer < ActionMailer::Base
 
   def outdated
     report = OutdatedEventReport.new
-    @out_of_date_events       = report.out_of_date_events
-    @near_out_of_date_events  = report.near_out_of_date_events
+    @out_of_date_events = report.out_of_date_events
+    @near_out_of_date_events = report.near_out_of_date_events
 
     if report.all_in_date?
       subject  = 'All events in date'
