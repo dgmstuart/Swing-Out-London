@@ -4,7 +4,7 @@ module Faker
   class Facebook
     class << self
       def uid
-        Number.number(17)
+        Number.number(digits: 17)
       end
 
       def access_token

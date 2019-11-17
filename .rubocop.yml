@@ -3,6 +3,7 @@ inherit_from: .rubocop_todo.yml
 require:
   - rubocop-rspec
   - rubocop-rails
+  - rubocop-faker
 
 inherit_mode:
   merge:
