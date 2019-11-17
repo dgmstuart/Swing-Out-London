@@ -297,12 +297,15 @@ describe Event do
     it 'is invalid if it has neither a class nor a social nor a taster' do
       expect(FactoryBot.build(:event, has_taster: false, has_social: false, has_class: false)).not_to be_valid
     end
+
     it 'is invalid if it has a taster but no class or social' do
       expect(FactoryBot.build(:event, has_taster: true, has_social: false, has_class: false)).not_to be_valid
     end
+
     it 'is valid if it has a class but no taster or social (and everything else is OK)' do
       expect(FactoryBot.build(:event, has_taster: false, has_social: false, has_class: true)).to be_valid
     end
+
     it 'is valid if it has a social but no taster or class (and everything else is OK)' do
       expect(FactoryBot.build(:event, has_taster: false, has_social: true, has_class: false)).to be_valid
     end

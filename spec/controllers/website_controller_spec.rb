@@ -21,16 +21,19 @@ describe WebsiteController do
       expect(assigns[:last_updated_time]).not_to be_blank
       expect(assigns[:last_updated_date]).not_to be_blank
     end
+
     it 'assigns the last updated datetime' do
       stub_event_methods
       get :index
       expect(assigns[:last_updated_datetime]).to be_a(Time)
     end
+
     it 'assigns today' do
       stub_event_methods
       get :index
       expect(assigns[:today]).to be_a(Date)
     end
+
     it 'assigns a list of events to @classes' do
       # CALLS MODEL
       allow(Event).to receive(:socials_dates).and_return []
@@ -38,6 +41,7 @@ describe WebsiteController do
       get :index
       expect(assigns[:classes][0]).to be_an(Event)
     end
+
     it 'assigns an array containing a list of events to @socials_dates' do
       # CALLS MODEL
       stub_classes

@@ -8,6 +8,7 @@ describe EventsHelper do
       event = FactoryBot.create(:event, has_class: false)
       expect { helper.school_name(event) }.to raise_error(RuntimeError)
     end
+
     context 'when there is no organiser' do
       before do
         @class = FactoryBot.create(:class, class_organiser: nil)
@@ -28,11 +29,13 @@ describe EventsHelper do
         @organiser.name = nil
         expect { helper.school_name(@class) }.to raise_error(RuntimeError)
       end
+
       it "uses the name if the shortname doesn't exist" do
         @organiser.name = 'foo'
         @organiser.shortname = nil
         expect(helper.school_name(@class)).to eq('foo')
       end
+
       it 'uses the shortname as an abbreviation if it exists' do
         @organiser.name = 'foo'
         @organiser.shortname = 'bar'
