@@ -48,4 +48,8 @@ module ShareButtonHelper
             target: '_blank',
             class: 'share_button facebook', rel: 'noopener'
   end
+
+  def donate_button
+    link_to 'Donate', ENV['DONATE_LINK']
+  end
 end
