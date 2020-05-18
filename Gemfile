@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 ruby '2.6.3'
 
-gem 'rails', '5.2.3'
+gem 'rails', '~> 5.2.3'
 
 gem 'actionpack-action_caching' # to support pre rails-4 style action caching
 gem 'audited'
@@ -27,6 +27,7 @@ gem 'rails-observers' # to support pre rails-4 style cache sweeping
 gem 'redcarpet' # Markdown
 gem 'rollbar'
 gem 'sassc-rails'
+gem 'sprockets', '< 4'
 gem 'test-unit'
 gem 'uglifier'
 
